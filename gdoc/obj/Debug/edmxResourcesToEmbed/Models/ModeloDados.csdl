@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="databaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Documento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NomeDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DescricaoDocumento" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DataDocumento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DataCadastroDocumento" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TipoDocumento" Relationship="Self.FK_Documento_TipoDocumento" FromRole="Documento" ToRole="TipoDocumento" />
+  </EntityType>
+  <EntityType Name="TipoDocumento">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DescricaoTipo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="DataCadastro" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Documentoes" Relationship="Self.FK_Documento_TipoDocumento" FromRole="TipoDocumento" ToRole="Documento" />
+  </EntityType>
+  <Association Name="FK_Documento_TipoDocumento">
+    <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+    <End Role="Documento" Type="Self.Documento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoDocumento">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Documento">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="databaseEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Documentoes" EntityType="Self.Documento" />
+    <EntitySet Name="TipoDocumentoes" EntityType="Self.TipoDocumento" />
+    <AssociationSet Name="FK_Documento_TipoDocumento" Association="Self.FK_Documento_TipoDocumento">
+      <End Role="TipoDocumento" EntitySet="TipoDocumentoes" />
+      <End Role="Documento" EntitySet="Documentoes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

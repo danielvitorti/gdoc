@@ -1,0 +1,51 @@
+﻿@model gdoc.Models.Documento
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Documento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.observacaoDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observacaoDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataCadastro)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Alterar", "Edit", new { id = Model.idDocumento }) |
+    @Html.ActionLink("Documentos Cadastrados", "index")
+</p>

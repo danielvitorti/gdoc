@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="databaseModelStoreContainer" CdmEntityContainer="databaseEntities">
+    <EntitySetMapping Name="Documentoes">
+      <EntityTypeMapping TypeName="databaseModel.Documento">
+        <MappingFragment StoreEntitySet="Documento">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NomeDocumento" ColumnName="NomeDocumento" />
+          <ScalarProperty Name="DescricaoDocumento" ColumnName="DescricaoDocumento" />
+          <ScalarProperty Name="DataDocumento" ColumnName="DataDocumento" />
+          <ScalarProperty Name="DataCadastroDocumento" ColumnName="DataCadastroDocumento" />
+          <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoDocumentoes">
+      <EntityTypeMapping TypeName="databaseModel.TipoDocumento">
+        <MappingFragment StoreEntitySet="TipoDocumento">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DescricaoTipo" ColumnName="DescricaoTipo" />
+          <ScalarProperty Name="DataCadastro" ColumnName="DataCadastro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

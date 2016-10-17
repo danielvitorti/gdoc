@@ -1,0 +1,57 @@
+﻿@model gdoc.Models.Documento
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Excluir</h2>
+
+<h3>Deseja realmente excluir este documento?</h3>
+<div>
+    <h4>Documento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomeDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomeDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipoDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipoDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.observacaoDocumento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.observacaoDocumento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dataCadastro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dataCadastro)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Documentos Cadastrados", "Index")
+        </div>
+    }
+</div>
