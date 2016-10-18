@@ -21,7 +21,7 @@ namespace gdoc.Controllers
         }
 
         // GET: Documento/Details/5
-        public ActionResult detalhes(long? id)
+        public ActionResult detalhe(long? id)
         {
             if (id == null)
             {
@@ -71,24 +71,26 @@ namespace gdoc.Controllers
                     documento.tipoDocumento = Request.Form["tipoDocumento"];
                     documento.observacaoDocumento = Request.Form["observacaoDocumento"];
                 
-                    documento.nomeArquivo = nomeArquivoSalvar;
+                    documento.nomeArquivo = file.FileName;
 
-                    return View(documento);
+                //return View(documento);
 
-                }
+                    db.Documento.Add(documento);
+                    db.SaveChanges();
+                    return RedirectToAction("index");
+                    //return View(documento);
+
+            }
                 catch(Exception e)
                 {
                 //ViewBag.Message = "Erro ao salvar arquivo";
                 Response.Write("Erro: " + e.Message);
                 Response.End();
                 }
-                
-                db.Documento.Add(documento);
-                db.SaveChanges();
-                return RedirectToAction("index");
+               
            // }
 
-          //  return View(documento);
+            return View(documento);
         }
 
         // GET: Documento/Edit/5

@@ -283,7 +283,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Documento\criar.cshtml" />
     <Content Include="Views\Documento\excluir.cshtml" />
-    <Content Include="Views\Documento\detalhes.cshtml" />
+    <Content Include="Views\Documento\detalhe.cshtml" />
     <Content Include="Views\Documento\editar.cshtml" />
     <Content Include="Views\Documento\index.cshtml" />
   </ItemGroup>

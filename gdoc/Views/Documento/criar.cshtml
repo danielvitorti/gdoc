@@ -36,8 +36,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.tipoDocumento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.tipoDocumento, new { htmlAttributes = new { @class = "form-control" } })
+
                 @Html.ValidationMessageFor(model => model.tipoDocumento, "", new { @class = "text-danger" })
+                <select name="tipoDocumento" id="tipoDocumento" class="form-control">
+                    <option value=""></option>
+                    <option value="1">Conta</option>
+                    <option value="2">Cheque</option>
+                    <option value="3">Recibo</option>
+                    <option value="4">Comprovante de Pagamento</option>
+                    <option value="5">Foto</option>
+                    <option value="6">Contracheque</option>
+                    <option value="7">Nota fiscal</option>
+                    <option value="8">Rifa</option>
+                    <option value="9">Canhoto</option>
+                    <option value="10">Bilhete de cinema</option>
+                </select>
             </div>
         </div>
 

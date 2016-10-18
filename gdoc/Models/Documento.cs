@@ -27,8 +27,8 @@ namespace gdoc.Models
         public string observacaoDocumento { get; set; }
         
         public string nomeArquivo { get; set; }
-        
 
+        [Display(Name = "Data de Cadastro")]
         public DateTime dataCadastro { get; set; }
 
         public Documento()

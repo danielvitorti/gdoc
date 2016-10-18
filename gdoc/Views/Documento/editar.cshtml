@@ -43,7 +43,69 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.tipoDocumento, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.tipoDocumento, new { htmlAttributes = new { @class = "form-control" } })
+                        <select name="tipoDocumento" id="tipoDocumento" class="form-control">
+                            <option value=""></option>
+                            <option value="1"
+                                    @if (Model.tipoDocumento == "1")
+                                    {
+                                        @Html.Raw("selected='selected'")
+                                    }
+                                    >Conta</option>
+                            <option value="2"
+                                    @if (Model.tipoDocumento == "2")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Cheque</option>
+                            <option value="3"
+                                    @if (Model.tipoDocumento == "3")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Recibo</option>
+                            <option value="4"
+                                    @if (Model.tipoDocumento == "4")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Comprovante de Pagamento</option>
+                            <option value="5" 
+                                    @if (Model.tipoDocumento == "5")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Foto</option>
+                            <option value="6"
+                                    @if (Model.tipoDocumento == "6")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Contracheque</option>
+                            <option value="7"
+                                    @if (Model.tipoDocumento == "7")
+                                    {
+                                        @Html.Raw("selected='selected'")
+                                    }
+                                    >Nota fiscal</option>
+                            <option value="8"
+                                    @if (Model.tipoDocumento == "8")
+                                    {
+                                        @Html.Raw("selected='selected'")
+                                    }
+                                    >Rifa</option>
+                            <option value="9"
+                                    @if (Model.tipoDocumento == "9")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Canhoto</option>
+                            <option value="10"
+                                    @if (Model.tipoDocumento == "10")
+                                    {
+                                       @Html.Raw("selected='selected'")
+                                    }
+                                    >Bilhete de cinema</option>
+                        </select>
                         @Html.ValidationMessageFor(model => model.tipoDocumento, "", new { @class = "text-danger" })
                     </div>
                 </div>

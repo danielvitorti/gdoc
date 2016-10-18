@@ -82,3 +82,4 @@ c:\projetos\net\gdoc\gdoc\obj\Debug\gdoc.pdb
 c:\projetos\net\gdoc\gdoc\obj\Debug\gdoc.Migrations.Mig01.resources
 c:\projetos\net\gdoc\gdoc\obj\Debug\gdoc.csproj.GenerateResource.Cache
 c:\projetos\net\gdoc\gdoc\obj\Debug\gdoc.Migrations.Mig02nomeArquivo.resources
+C:\projetos\net\gdoc\gdoc\obj\Debug\gdoc.csprojResolveAssemblyReference.cache
