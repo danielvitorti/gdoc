@@ -15,12 +15,14 @@ namespace gdoc.Controllers
         private ModeloDados db = new ModeloDados();
 
         // GET: Documento
+        [Authorize]
         public ActionResult index()
         {
             return View(db.Documento.ToList());
         }
 
         // GET: Documento/Details/5
+        [Authorize]
         public ActionResult detalhe(long? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace gdoc.Controllers
         }
 
         // GET: Documento/Create
+        [Authorize]
         public ActionResult criar()
         {
             return View();
@@ -46,11 +49,10 @@ namespace gdoc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult criar([Bind(Include = "idDocumento,nomeDocumento,tipoDocumento,observacaoDocumento,dataCadastro,nomeArquivo")] Documento documento)
         {
-            // if (ModelState.IsValid)
-            // {
-            /* Tratamento de exceções para o upload do arquikvo*/
+ 
 
         
             try
@@ -73,27 +75,27 @@ namespace gdoc.Controllers
                 
                     documento.nomeArquivo = file.FileName;
 
-                //return View(documento);
+                
 
                     db.Documento.Add(documento);
                     db.SaveChanges();
                     return RedirectToAction("index");
-                    //return View(documento);
-
+                
             }
                 catch(Exception e)
                 {
-                //ViewBag.Message = "Erro ao salvar arquivo";
+                
                 Response.Write("Erro: " + e.Message);
                 Response.End();
                 }
                
-           // }
+           
 
             return View(documento);
         }
 
         // GET: Documento/Edit/5
+        [Authorize]
         public ActionResult editar(long? id)
         {
             if (id == null)
@@ -113,18 +115,58 @@ namespace gdoc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult editar([Bind(Include = "idDocumento,nomeDocumento,tipoDocumento,observacaoDocumento,dataCadastro")] Documento documento)
+        [Authorize]
+        public ActionResult editar([Bind(Include = "idDocumento,nomeDocumento,tipoDocumento,observacaoDocumento,dataCadastro,nomeArquivo")] Documento documento)
         {
-            if (ModelState.IsValid)
+
+
+            try
             {
+
+                HttpPostedFileBase file = Request.Files[0];
+
+
+                /* Excluo o arquivo pra depois subir outro */
+                if (file.ContentLength > 0)
+                {
+
+                    System.IO.File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "arquivos\\" + documento.nomeArquivo));
+
+                    string nomeArquivoSalvar = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "arquivos");
+
+                    nomeArquivoSalvar = Path.Combine(nomeArquivoSalvar, Path.GetFileName(file.FileName));
+
+                    file.SaveAs(nomeArquivoSalvar);
+
+                }
+
+                documento.nomeDocumento = Request.Form["nomeDocumento"];
+
+                documento.tipoDocumento = Request.Form["tipoDocumento"];
+                documento.observacaoDocumento = Request.Form["observacaoDocumento"];
+
+                documento.nomeArquivo = file.FileName;
+
+
                 db.Entry(documento).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("index");
+
+
             }
+            catch(Exception e)
+            {
+
+                Response.Write("Erro: " + e.Message);
+                Response.End();
+
+            }
+         
             return View(documento);
         }
 
         // GET: Documento/Delete/5
+        [Authorize]
         public ActionResult excluir(long? id)
         {
             if (id == null)
@@ -142,14 +184,28 @@ namespace gdoc.Controllers
         // POST: Documento/Delete/5
         [HttpPost, ActionName("excluir")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(long id)
         {
             Documento documento = db.Documento.Find(id);
-            db.Documento.Remove(documento);
-            db.SaveChanges();
-            return RedirectToAction("index");
-        }
+                try
+                {
+                    System.IO.File.Delete(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "arquivos\\" + documento.nomeArquivo));
+                    db.Documento.Remove(documento);
+                    db.SaveChanges();
+                    return RedirectToAction("index");
 
+                }
+                catch(Exception e)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.InternalServerError); 
+
+                }
+     
+            return RedirectToAction("index");
+
+        }
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)
