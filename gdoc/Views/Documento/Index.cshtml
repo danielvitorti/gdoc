@@ -1,4 +1,7 @@
-﻿@model IEnumerable<gdoc.Models.Documento>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<gdoc.Models.Documento>
+
 
 @{
     ViewBag.Title = "Index";
@@ -11,42 +14,54 @@
     @Html.ActionLink("Cadastrar Novo Documento", "criar")
 </p>
 <table class="table">
+<thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.nomeDocumento)
+            Documento
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tipoDocumento)
+            Tipo de documento
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.observacaoDocumento)
+            Observação
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dataCadastro)
+            Data de cadastro
         </th>
-        <th></th>
+        <th>
+            Ações
+        </th>
     </tr>
+</thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.nomeDocumento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipoDocumento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.observacaoDocumento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dataCadastro)
-        </td>
-        <td>
-            @Html.ActionLink("Alterar", "editar", new { id=item.idDocumento }) |
-            @Html.ActionLink("Detalhes", "detalhe", new { id=item.idDocumento }) |
-            @Html.ActionLink("Excluir", "excluir", new { id=item.idDocumento })
-        </td>
-    </tr>
-}
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nomeDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.observacaoDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dataCadastro)
+                </td>
+                <td>
+                    @Html.ActionLink("Alterar", "editar", new { id = item.idDocumento }) |
+                    @Html.ActionLink("Detalhes", "detalhe", new { id = item.idDocumento }) |
+                    @Html.ActionLink("Excluir", "excluir", new { id = item.idDocumento })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+@if (Model.HasNextPage || Model.HasPreviousPage)
+{
+    <div style="text-align: center">
+        @Html.PagedListPager(Model, (page) => Url.Action("Index", new { page = page, filtro = @ViewBag.filtro }), PagedListRenderOptions.Classic)
+    </div>
+}

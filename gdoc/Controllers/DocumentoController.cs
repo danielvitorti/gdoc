@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using gdoc.Models;
 using System.IO;
+using PagedList;
 namespace gdoc.Controllers
 {
     public class DocumentoController : Controller
@@ -16,9 +17,14 @@ namespace gdoc.Controllers
 
         // GET: Documento
         [Authorize]
-        public ActionResult index()
+        public ActionResult index(int? page)
         {
-            return View(db.Documento.ToList());
+            IQueryable<Documento> documentos = db.Documento;
+            IPagedList<Documento> documentoPaged = documentos.OrderBy(x => x.dataCadastro).ToPagedList(page ?? 1, 10);
+            IPagedList<Documento> model = documentos.OrderBy(x => x.dataCadastro).ToPagedList(page ?? 1, 10);
+            return View(model);
+
+            
         }
 
         // GET: Documento/Details/5

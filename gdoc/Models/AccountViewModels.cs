@@ -77,7 +77,7 @@ namespace gdoc.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar senha")]
-        [Compare("NewPassword", ErrorMessage = "As senhas fornecidas devem ser iguais")]
+        [Compare("Password", ErrorMessage = "As senhas fornecidas devem ser iguais")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -96,7 +96,7 @@ namespace gdoc.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar senha")]
-        [Compare("NewPassword", ErrorMessage = "As senhas fornecidas devem ser iguais")]
+        [Compare("Password", ErrorMessage = "As senhas fornecidas devem ser iguais")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
